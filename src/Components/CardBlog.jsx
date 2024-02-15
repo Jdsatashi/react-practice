@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
 const CardBlog = () => {
   const blog = {
     title: 'First blog',

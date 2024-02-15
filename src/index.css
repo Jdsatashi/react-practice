@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+    .element_center {
+        @apply flex justify-center items-center
+    }
+    .card_simple {
+        @apply p-4 xl:px-12 xl:py-8 mt-4 xl:mt-8 bg-white rounded-none w-[480px] xl:rounded-md border-2 shadow-md
+    }
+    .card_title {
+        @apply font-bold font-serif text-2xl
+    }
+    .input_group {
+        @apply mb-3 grid grid-cols-4
+    }
+    .input_text {
+        @apply col-span-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-gray-500 block w-full p-2.5
+    }
+    .input_label {
+        @apply flex items-center font-medium text-lg
+    }
+}

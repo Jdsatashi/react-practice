@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react';
+import {useState, useRef, createContext, useEffect} from 'react';
 import CreateBlog from './Components/CreateBlog';
 import CardBlog from './Components/CardBlog';
 
 function App() {
-  const [blogs, setBlogs] = useState([]);
   const createBlogRef = useRef(null);
+  const [blogs, setBlogs] = useState([]);
   const sampleBlog = [
     {
       title: 'First blog',
@@ -22,8 +22,11 @@ function App() {
       author: 'John Deen',
     },
   ];
+  useEffect(() => {
+    setBlogs((_) => sampleBlog)
+  }, []);
   function getTestData() {
-    console.log(createBlogRef.current);
+    console.log(createBlogRef.current.newBlog());
   }
   return (
     <>
@@ -35,7 +38,10 @@ function App() {
           Simple Blog App
         </h3>
       </div>
-      <CreateBlog ref={createBlogRef} />
+      <div>
+        <CreateBlog blogs={blogs} ref={createBlogRef} />
+      </div>
+
       <CardBlog />
       <button onClick={getTestData}>Test</button>
     </>
