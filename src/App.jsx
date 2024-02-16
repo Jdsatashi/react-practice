@@ -1,4 +1,4 @@
-import {useState, useRef, createContext, useEffect} from 'react';
+import { useState, useRef, createContext, useEffect } from 'react';
 import CreateBlog from './Components/CreateBlog';
 import CardBlog from './Components/CardBlog';
 
@@ -23,16 +23,17 @@ function App() {
     },
   ];
   useEffect(() => {
-    setBlogs((_) => sampleBlog)
+    setBlogs((_) => sampleBlog);
   }, []);
   function getTestData() {
+    console.log(blogs);
     console.log(createBlogRef.current.newBlog());
   }
   return (
     <>
       <div>
-        <h3 className='font-semibold text-2xl bg-slate-100 text-slate-800 py-4'>
-          <span className='font-bold text-3xl mx-1 text-emerald-500'>
+        <h3 className='py-4 text-2xl font-semibold bg-slate-100 text-slate-800'>
+          <span className='mx-1 text-3xl font-bold text-emerald-500'>
             JDsatashi
           </span>
           Simple Blog App
@@ -41,9 +42,12 @@ function App() {
       <div>
         <CreateBlog blogs={blogs} ref={createBlogRef} />
       </div>
-
-      <CardBlog />
-      <button onClick={getTestData}>Test</button>
+      {blogs.map((blog, idx) => (
+        <CardBlog key={idx} blog={blog} />
+      ))}
+      <button className='btn_green' onClick={getTestData}>
+        Test
+      </button>
     </>
   );
 }
