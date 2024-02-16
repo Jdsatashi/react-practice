@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 const CardBlog = ({ blog }) => {
   return (
-    <div>
-      <div className='p-4 xl:px-12 xl:py-8 mt-4 xl:mt-8 bg-white rounded-none w-[480px] xl:rounded-md border-2 shadow-md'>
+    <div className='element_center'>
+      <div className='p-4 xl:px-12 xl:py-8 mt-4 xl:mt-8 bg-white rounded-none w-[640px] xl:rounded-md border-2 shadow-md'>
         <div className='font-sans text-2xl font-bold text-center'>
           {blog.title}
         </div>
