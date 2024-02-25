@@ -13,14 +13,20 @@
   filter: blur(24px);
 }
 
-.image_transition {
-  transition: opacity 0.5s ease-in-out;
-}
-
 .text_red {
   color: red;
 }
 
-.animated {
-  animation: fadeInOut 0.5s ease-in-out;
+.image_animation {
+  animation: slide-right 2s linear infinite;
+}
+
+@keyframes slide-right {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
 }

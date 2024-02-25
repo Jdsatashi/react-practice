@@ -60,17 +60,17 @@ const Carousel = () => {
         onMouseOver={() => console.log('Hover')}>
         <div className='relative w-full'>
           <div className='relative h-56 overflow-hidden rounded-lg md:h-96'>
-            <div className='duration-700 ease-in-out'>
+            <div className=''>
               <img
                 src={active.imgUrl}
-                alt=''
-                className='absolute block w-full h-full duration-700 ease-in-out -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 image_transition'
+                alt='Slide image'
+                className={`absolute`}
               />
             </div>
           </div>
-          <div className='absolute z-40 flex w-full space-x-3 -translate-x-1/2 shadow-md lg:py-1 lg:rounded-sm lg:px-4 lg:w-auto backdrop-brightness-50 bottom-2 lg:bottom-4 left-1/2 rtl:space-x-reverse'>
+          <div className='absolute z-40 flex w-full space-x-3 -translate-x-1/2 shadow-md lg:py-0.5 lg:rounded-full lg:px-0.5 lg:w-auto backdrop-brightness-50 bottom-2 lg:bottom-4 left-1/2 rtl:space-x-reverse'>
             {/* Use dot location slide */}
-            {/* {data.map((_, idx) => (
+            {data.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveIdx(idx)}
@@ -79,9 +79,9 @@ const Carousel = () => {
                     ? 'bg-black hover:bg-slate-700'
                     : 'bg-gray-300 hover:bg-gray-500'
                 }`}></button>
-            ))} */}
+            ))}
             {/* Use title for slide */}
-            <h3 className='text-xl font-bold text-slate-200'>{active.title}</h3>
+            {/* <h3 className='text-xl font-bold text-slate-200'>{active.title}</h3> */}
           </div>
           <button
             type='button'
