@@ -11,11 +11,9 @@ const Carousel = () => {
     { title: 'This is the picture number Four 4th.', imgUrl: Pic4 },
   ];
   const [activeIdx, setActiveIdx] = useState(0);
-  const [active, setActive] = useState(data[0]);
   const [timeInterval, setTimeInterval] = useState(5);
   const intervalRef = useRef(null);
   useEffect(() => {
-    setActive((_) => data[activeIdx]);
     setTimeInterval(5);
   }, [activeIdx]);
   useEffect(() => {
@@ -62,27 +60,29 @@ const Carousel = () => {
           <div className='relative h-56 overflow-hidden rounded-lg md:h-96'>
             <div className=''>
               <img
-                src={active.imgUrl}
+                src={data[activeIdx].imgUrl}
                 alt='Slide image'
-                className={`absolute`}
+                className={`absolute w-full h-full`}
               />
             </div>
           </div>
-          <div className='absolute z-40 flex w-full space-x-3 -translate-x-1/2 shadow-md lg:py-0.5 lg:rounded-full lg:px-0.5 lg:w-auto backdrop-brightness-50 bottom-2 lg:bottom-4 left-1/2 rtl:space-x-reverse'>
+          <div className='absolute z-40 flex space-x-3 -translate-x-1/2 shadow-md py-1 rounded-full px-1.5 lg:w-auto bottom-2 lg:bottom-4 left-1/2 rtl:space-x-reverse'>
             {/* Use dot location slide */}
             {data.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveIdx(idx)}
-                className={`w-6 h-6 rounded-full border-2 border-spacing-4 m-1 focus:outline-none ${
+                className={`w-6 h-6 rounded-full border-2 border-spacing-4 focus:outline-none ${
                   idx === activeIdx
                     ? 'bg-black hover:bg-slate-700'
                     : 'bg-gray-300 hover:bg-gray-500'
                 }`}></button>
             ))}
-            {/* Use title for slide */}
-            {/* <h3 className='text-xl font-bold text-slate-200'>{active.title}</h3> */}
           </div>
+          {/* <div className='absolute z-40 flex w-full space-x-3 -translate-x-1/2 shadow-md lg:py-1 lg:rounded-full lg:px-1.5 lg:w-auto backdrop-brightness-50 bottom-2 lg:bottom-4 left-1/2 rtl:space-x-reverse'>   */}
+          {/* Use title for slide */}
+          {/* <h3 className='text-xl font-bold text-slate-200'>{active.title}</h3> */}
+          {/* </div> */}
           <button
             type='button'
             className='absolute top-0 z-30 flex items-center justify-center h-full px-2 cursor-pointer lg:px-4 hover:backdrop-brightness-50 rounded-s-md hover:bg-white/30 start-0 group focus:outline-none'
