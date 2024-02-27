@@ -71,6 +71,7 @@ const Carousel = () => {
                     src={slide.imgUrl}
                     alt={slide.title}
                     className='w-full h-full rounded-lg'
+                    loading='lazy'
                   />
                 ))}
               </div>
