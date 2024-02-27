@@ -22,9 +22,9 @@ const Carousel2 = () => {
     setActiveIdx(newIndex);
   };
   return (
-    <div className='carousel'>
+    <div className='w-[700px] overflow-hidden'>
       <div
-        className='inner'
+        className='transition-transform whitespace-nowrap'
         style={{ transform: `translate(-${activeIdx * 100}%)` }}>
         {data.map((slide, idx) => (
           <Carousel2Item key={idx} data={slide} />

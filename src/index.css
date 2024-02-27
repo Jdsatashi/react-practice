@@ -23,4 +23,7 @@
   .btn_green {
     @apply px-4 py-2 font-serif font-medium text-white bg-green-500 rounded-md hover:bg-emerald-500;
   }
+  .carousel_btn {
+    @apply absolute top-0 z-30 h-full px-2 cursor-pointer lg:px-4 lg:hover:backdrop-brightness-50 lg:hover:bg-white/30 focus:outline-none;
+  }
 }
