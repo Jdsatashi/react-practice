@@ -3,7 +3,7 @@ const RegisterFields = [
   {
     name: 'username',
     type: 'text',
-    validate: ['required', 'include:[word,number,_]'],
+    validate: ['required'],
   },
   { name: 'email', type: 'text', validate: ['required', 'email'] },
   { name: 'dob', type: 'date', validate: ['required'] },
@@ -20,7 +20,7 @@ const RegisterFields = [
   {
     name: 'confirmpassword',
     type: 'password',
-    validate: ['required', 'min_char:8', 'confirm:password'],
+    validate: ['required', 'min_char:8'],
   },
 ];
 

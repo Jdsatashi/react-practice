@@ -7,7 +7,7 @@ const InputValidate = {
       };
     }
     return {
-      error: false,
+      error: null,
       message: '',
     };
   },
@@ -19,7 +19,7 @@ const InputValidate = {
       };
     }
     return {
-      error: false,
+      error: null,
       message: '',
     };
   },
@@ -31,31 +31,31 @@ const InputValidate = {
       };
     }
     return {
-      error: false,
+      error: null,
       message: '',
     };
   },
-  min_num: (value: number, min: number, message: string) => {
-    if (value < min) {
+  min_num: (value: string, min: number) => {
+    if (parseInt(value) < min) {
       return {
         error: true,
-        message: message,
+        message: `number must larger than ${min}.`,
       };
     }
     return {
-      error: false,
+      error: null,
       message: '',
     };
   },
-  max_num: (value: number, max: number, message: string) => {
-    if (value < max) {
+  max_num: (value: string, max: number) => {
+    if (parseInt(value) > max) {
       return {
         error: true,
-        message: message,
+        message: `number must lower than ${max}`,
       };
     }
     return {
-      error: false,
+      error: null,
       message: '',
     };
   },
@@ -68,11 +68,10 @@ const InputValidate = {
       };
     }
     return {
-      error: false,
+      error: null,
       message: '',
     };
   },
-  include: (value: string, options: Array<string>) => {},
 };
 
 export default InputValidate;
