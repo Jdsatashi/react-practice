@@ -1,4 +1,7 @@
+import { RegExpInclude } from './ShortScript';
+
 const InputValidate = {
+  // Field must has value
   required: (value: string) => {
     if (value.trim() === '') {
       return {
@@ -11,8 +14,9 @@ const InputValidate = {
       message: '',
     };
   },
-  min_char: (value: string, min: number) => {
-    if (value.length < min) {
+  // Field has at least minimun character as argument
+  min_char: (value: string, min: string) => {
+    if (value.length < parseInt(min)) {
       return {
         error: true,
         message: `field must at least ${min} characters.`,
@@ -23,8 +27,9 @@ const InputValidate = {
       message: '',
     };
   },
-  max_char: (value: string, max: number) => {
-    if (value.length > max) {
+  // Field has at maximun character as argument
+  max_char: (value: string, max: string) => {
+    if (value.length > parseInt(max)) {
       return {
         error: true,
         message: `field must below ${max} characters.`,
@@ -35,8 +40,9 @@ const InputValidate = {
       message: '',
     };
   },
-  min_num: (value: string, min: number) => {
-    if (parseInt(value) < min) {
+  // Field has at least minimun number as argument
+  min_num: (value: string, min: string) => {
+    if (parseInt(value) < parseInt(min)) {
       return {
         error: true,
         message: `number must larger than ${min}.`,
@@ -47,8 +53,9 @@ const InputValidate = {
       message: '',
     };
   },
-  max_num: (value: string, max: number) => {
-    if (parseInt(value) > max) {
+  // Field has at maximum number as argument
+  max_num: (value: string, max: string) => {
+    if (parseInt(value) > parseInt(max)) {
       return {
         error: true,
         message: `number must lower than ${max}`,
@@ -59,17 +66,41 @@ const InputValidate = {
       message: '',
     };
   },
+  // Field must be email
   email: (value: string) => {
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
     if (!emailRegex.test(value)) {
       return {
         error: true,
-        message: 'Email is invalid.',
+        message: 'field is invalid.',
       };
     }
     return {
       error: null,
       message: '',
+    };
+  },
+  // field must including character "word,number,_,@,#"...
+  include: (value: string, including: string) => {
+    const charTypes = including.split(',');
+    const exceptedChar = new RegExp(RegExpInclude(charTypes));
+    if (!exceptedChar.test(value)) {
+      return {
+        error: true,
+        message: `field must start with Word (a,b,c) and include only "${including}".`,
+      };
+    }
+    return {
+      error: null,
+      message: '',
+    };
+  },
+  // Field must match with value of second argument
+  confirm: (value: string, matchValue: string) => {
+    const condition = value === matchValue;
+    return {
+      error: condition ? null : true,
+      message: condition ? '' : 'field not matching.',
     };
   },
 };

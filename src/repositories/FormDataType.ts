@@ -4,7 +4,7 @@ interface FormDataType {
   dob: string;
   age: string;
   password: string;
-  confirmpassword: string;
+  confirm_password: string;
   [key: string]: string;
 }
 export default FormDataType;
