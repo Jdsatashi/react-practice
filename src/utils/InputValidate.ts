@@ -3,97 +3,64 @@ import { RegExpInclude } from './ShortScript';
 const InputValidate = {
   // Field must has value
   required: (value: string) => {
-    if (value.trim() === '') {
-      return {
-        error: true,
-        message: 'field can not blank.',
-      };
-    }
+    const condition = value.trim() === '';
     return {
-      error: null,
-      message: '',
+      error: condition ? null : true,
+      message: condition ? '' : `field can not blank.`,
     };
   },
   // Field has at least minimun character as argument
   min_char: (value: string, min: string) => {
-    if (value.length < parseInt(min)) {
-      return {
-        error: true,
-        message: `field must at least ${min} characters.`,
-      };
-    }
+    const condition = value.length >= parseInt(min);
     return {
-      error: null,
-      message: '',
+      error: condition ? null : true,
+      message: condition ? '' : `field must at least ${min} characters.`,
     };
   },
   // Field has at maximun character as argument
   max_char: (value: string, max: string) => {
-    if (value.length > parseInt(max)) {
-      return {
-        error: true,
-        message: `field must below ${max} characters.`,
-      };
-    }
+    const condition = value.length <= parseInt(max);
     return {
-      error: null,
-      message: '',
+      error: condition ? null : true,
+      message: condition ? '' : `field must below at ${max} characters.`,
     };
   },
   // Field has at least minimun number as argument
   min_num: (value: string, min: string) => {
-    if (parseInt(value) < parseInt(min)) {
-      return {
-        error: true,
-        message: `number must larger than ${min}.`,
-      };
-    }
+    const condition = parseInt(value) >= parseInt(min);
     return {
-      error: null,
-      message: '',
+      error: condition ? null : true,
+      message: condition ? '' : `number must lower than ${min}`,
     };
   },
   // Field has at maximum number as argument
   max_num: (value: string, max: string) => {
-    if (parseInt(value) > parseInt(max)) {
-      return {
-        error: true,
-        message: `number must lower than ${max}`,
-      };
-    }
+    const condition = parseInt(value) <= parseInt(max);
     return {
-      error: null,
-      message: '',
+      error: condition ? null : true,
+      message: condition ? '' : `number must lower than ${max}`,
     };
   },
   // Field must be email
   email: (value: string) => {
     // Email regex format
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
-    if (!emailRegex.test(value)) {
-      return {
-        error: true,
-        message: 'field is invalid.',
-      };
-    }
+    const condition = emailRegex.test(value);
     return {
-      error: null,
-      message: '',
+      error: condition ? null : true,
+      message: condition ? '' : 'field is invalid.',
     };
   },
   // Field must including character "word,number,_,@,#"...
   include: (value: string, including: string) => {
     const charTypes = including.split(',');
     const exceptedChar = new RegExp(RegExpInclude(charTypes));
-    if (!exceptedChar.test(value)) {
-      return {
-        error: true,
-        message: `field must start with Word (a,b,c) and include only "${including}".`,
-      };
-    }
+    const condition = exceptedChar.test(value);
     return {
-      error: null,
-      message: '',
+      error: condition ? null : true,
+      message: condition
+        ? ''
+        : `field must start with Word (a,b,c) and include only "${including}".`,
     };
   },
   // Field must match with value of second argument
@@ -104,7 +71,23 @@ const InputValidate = {
       message: condition ? '' : 'field not matching.',
     };
   },
-  //
+  // Datetime ...
+  min_date: (value: string, min: string) => {
+    console.log(value);
+    console.log(min);
+    return {
+      error: null,
+      message: '',
+    };
+  },
+  max_date: (value: string, max: string) => {
+    console.log(value);
+    console.log(max);
+    return {
+      error: null,
+      message: '',
+    };
+  },
 };
 
 export default InputValidate;
