@@ -1,39 +1,53 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import InputE from './InputE';
 import FormDataType from '../repositories/FormDataType';
 import RegisterFields from '../variables/RegisterFields';
 import InputValidate from '../utils/InputValidate';
 
+// --- Assign variables required ---
+const fields = RegisterFields;
+const defaultData = {
+  username: '',
+  email: '',
+  dob: '',
+  age: '',
+  password: '',
+  confirm_password: '',
+};
+
 const Form = () => {
-  // --- Assign variables required ---
-  const fields = RegisterFields;
-  const defaultData = {
-    username: '',
-    email: '',
-    dob: '',
-    age: '',
-    password: '',
-    confirm_password: '',
-  };
-  // --- React state ---
+  /* --- React state --- */
   const [formData, setFormData] = useState<FormDataType>(defaultData);
   const [fieldError, setFieldError] = useState<FormDataType>(defaultData);
-  // --- Callback function ---
+  const [submitting, setSubmitting] = useState<number>(0);
+  /* --- React useEffect --- */
+  // Handle submit when submitting was changed
+  useEffect(() => {
+    handleSubmit();
+  }, [submitting]);
+  /* --- Callback function --- */
   // Set field value to form data when typing
-  const handleInputChange = (name: string, value: string) => {
-    // Update field value when typing
-    setFormData((data) => ({ ...data, [name]: value }));
-    // Remove error message when typing
-    setFieldError((err) => ({ ...err, [name]: '' }));
-  };
+  const handleInputChange = useCallback(
+    (name: string, value: string) => {
+      // Update field value when typing
+      setFormData((data) => ({ ...data, [name]: value }));
+      // Remove error message when typing
+      if (fieldError[name] !== '') {
+        setFieldError((err) => ({ ...err, [name]: '' }));
+      }
+    },
+    [formData, fieldError]
+  );
   // Handle on submit/click submit button
   const submitForm = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // Proccessing for validate
+    // Validate input error
     handleValidate();
+    // Change submitting to process handle submit
+    setSubmitting((submitting) => submitting + 1);
   };
   // Validate data before submit
-  const handleValidate = () => {
+  const handleValidate = useCallback(() => {
     // Loop through each field to check rules
     fields.forEach((field) => {
       if (Array.isArray(field.validate)) {
@@ -78,9 +92,18 @@ const Form = () => {
         }
       }
     });
-    fields.every((field) => field.name);
-  };
-  // --- Attributes for input component ---
+  }, [formData]);
+  // Handling submit function
+  const handleSubmit = useCallback(() => {
+    // Error false when all fields error = '' mean not have error message
+    const notErr = fields.every((field) => fieldError[field.name] === '');
+    // submitting > 0 prevent when first time submit all error message is ''
+    if (submitting > 0 && notErr) {
+      // Handle when submit
+      console.log('Submitting');
+    }
+  }, [fieldError]);
+  /* --- Attributes for input component --- */
   const inputAttrib = (f: { name: string; type: string }) => {
     return {
       className: 'input_text',
@@ -90,7 +113,7 @@ const Form = () => {
       value: formData[f.name],
     };
   };
-  // --- JSX Element ---
+  /* --- JSX Element --- */
   return (
     <div className='element_center'>
       <div className='card_simple w-[720px] rounded-lg mx-4'>

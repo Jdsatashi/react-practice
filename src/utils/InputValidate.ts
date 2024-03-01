@@ -68,6 +68,7 @@ const InputValidate = {
   },
   // Field must be email
   email: (value: string) => {
+    // Email regex format
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
     if (!emailRegex.test(value)) {
       return {
@@ -80,7 +81,7 @@ const InputValidate = {
       message: '',
     };
   },
-  // field must including character "word,number,_,@,#"...
+  // Field must including character "word,number,_,@,#"...
   include: (value: string, including: string) => {
     const charTypes = including.split(',');
     const exceptedChar = new RegExp(RegExpInclude(charTypes));
@@ -103,6 +104,7 @@ const InputValidate = {
       message: condition ? '' : 'field not matching.',
     };
   },
+  //
 };
 
 export default InputValidate;

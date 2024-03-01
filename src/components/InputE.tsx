@@ -10,10 +10,10 @@ const InputE: FC<InputEProps> = ({
   errorMessage,
   ...data
 }) => {
-  // --- State variable ---
+  /* --- State variable --- */
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
-  // --- Effect function ---
+  /* --- Effect function --- */
   // Update current input value
   useEffect(() => {
     setInputValue((_) => data.atrb.value);
@@ -28,7 +28,7 @@ const InputE: FC<InputEProps> = ({
       inputRef.current!.classList.add('border-red-500');
     }
   }, [errorMessage]);
-  // --- Callback funtion ---
+  /* --- Callback funtion --- */
   // Update current input value and clear error
   const onInputType = (event: { target: { value: string } }) => {
     setInputValue((_) => event.target.value);
@@ -46,7 +46,7 @@ const InputE: FC<InputEProps> = ({
     }
     return FirstUpcase(label);
   };
-  // --- JSX Element ---
+  /* --- JSX Element --- */
   return (
     <div className='input_group'>
       <label className='input_label'>{handleLabel(label)}</label>
